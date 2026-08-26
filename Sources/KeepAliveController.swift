@@ -128,4 +128,21 @@ final class KeepAliveController: ObservableObject {
             logs.removeFirst(logs.count - 200)
         }
     }
+
+    #if DOCS_SCREENSHOT
+    func prepareDocumentationScreenshot() {
+        let baseDate = Date(timeIntervalSince1970: 1_788_000_000)
+        state = .stopped
+        isRunning = false
+        lastResult = "GET https://one.hust.edu.cn/ → HTTP 206，1 B，远端 210.42.108.232，经 utun4"
+        logs = [
+            LogEntry(date: baseDate, kind: .info, message: "开始单次测试。"),
+            LogEntry(
+                date: baseDate.addingTimeInterval(1),
+                kind: .success,
+                message: "GET https://one.hust.edu.cn/ → HTTP 206，1 B，远端 210.42.108.232，经 utun4（210.42.108.232）"
+            )
+        ]
+    }
+    #endif
 }

@@ -1,6 +1,14 @@
-## EasyConnect 保活 v1.0.1
+## EasyConnect 保活 v1.0.2
 
-首个公开版本。
+此版本改用标准 macOS DMG 分发，并提升应用窗口与 README 截图的清晰度。
+
+### 下载与安装
+
+1. 下载 `EasyConnect-KeepAlive-v1.0.2-macOS-universal.dmg`。
+2. 打开 DMG。
+3. 将“EasyConnect 保活.app”拖到“Applications”快捷入口。
+
+DMG 内的应用同时支持 Apple Silicon 与 Intel Mac。
 
 ### 主要功能
 
@@ -11,17 +19,15 @@
 - 单次测试、开始/停止控制和运行日志。
 - HTTP GET 在服务器支持时只下载 1 字节。
 - 不开机自启，不保存 VPN 凭据，不收集遥测。
-- Apple Silicon + Intel 通用应用。
 
 ### 本地验收
 
 - HTTPS 测试返回 HTTP 206，下载 1 B。
 - 路由回读确认目标经过 `utun4`。
 - 在同一华科 VPN 环境中连续观察超过 1 小时，周期请求持续成功。
+- DMG 已完成挂载、应用签名、版本和双架构回读验证。
 
-### 安装说明
-
-下载 `EasyConnect-KeepAlive-v1.0.1-macOS-universal.zip`，解压后将应用拖入“应用程序”。
+### 签名说明
 
 此版本使用本地临时签名，未经过 Apple Developer ID 公证。首次打开若 macOS 提示无法验证开发者，请在 Finder 中右键应用并选择“打开”。
 

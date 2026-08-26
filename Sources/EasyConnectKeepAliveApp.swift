@@ -6,7 +6,7 @@ struct EasyConnectKeepAliveApp: App {
         WindowGroup {
             ContentView()
         }
-        .defaultSize(width: 720, height: 760)
+        .defaultSize(width: 900, height: 820)
         .commands {
             CommandGroup(replacing: .newItem) { }
         }

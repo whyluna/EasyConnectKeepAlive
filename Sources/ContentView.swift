@@ -2,7 +2,7 @@ import SwiftUI
 import AppKit
 
 struct ContentView: View {
-    @StateObject private var controller = KeepAliveController()
+    @StateObject private var controller: KeepAliveController
 
     @AppStorage("transport") private var transportRaw = KeepAliveTransport.https.rawValue
     @AppStorage("address") private var address = "one.hust.edu.cn"
@@ -13,6 +13,16 @@ struct ContentView: View {
     @AppStorage("intervalSeconds") private var intervalSeconds = 300
     @AppStorage("requireEasyConnect") private var requireEasyConnect = true
     @AppStorage("requireTunnelRoute") private var requireTunnelRoute = true
+
+    @MainActor
+    init() {
+        _controller = StateObject(wrappedValue: KeepAliveController())
+    }
+
+    @MainActor
+    init(controller: KeepAliveController) {
+        _controller = StateObject(wrappedValue: controller)
+    }
 
     private var transport: KeepAliveTransport {
         KeepAliveTransport(rawValue: transportRaw) ?? .https
@@ -128,7 +138,7 @@ struct ContentView: View {
             logPanel
         }
         .padding(22)
-        .frame(minWidth: 680, minHeight: 700)
+        .frame(minWidth: 820, minHeight: 760)
         .onDisappear {
             controller.stop()
         }

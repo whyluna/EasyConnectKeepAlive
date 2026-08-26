@@ -20,10 +20,10 @@ jobs:
           codesign --verify --deep --strict --verbose=2 "build/EasyConnect 保活.app"
           lipo -archs "build/EasyConnect 保活.app/Contents/MacOS/EasyConnectKeepAlive" | grep -Eq "x86_64 arm64|arm64 x86_64"
 
-      - name: Archive app
-        run: ditto -c -k --sequesterRsrc --keepParent "build/EasyConnect 保活.app" "EasyConnect-KeepAlive-macOS-universal.zip"
+      - name: Package DMG
+        run: ./scripts/package_dmg.sh
 
       - uses: actions/upload-artifact@v4
         with:
           name: EasyConnect-KeepAlive-macOS-universal
-          path: EasyConnect-KeepAlive-macOS-universal.zip
+          path: dist/*.dmg

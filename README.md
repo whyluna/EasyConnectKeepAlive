@@ -37,8 +37,8 @@
 
 ## 下载与安装
 
-1. 前往 [Releases](https://github.com/whyluna/EasyConnectKeepAlive/releases) 下载最新的 `EasyConnect-KeepAlive-*-macOS-universal.zip`。
-2. 解压后，将“EasyConnect 保活.app”拖入“应用程序”文件夹。
+1. 前往 [Releases](https://github.com/whyluna/EasyConnectKeepAlive/releases) 下载最新的 `EasyConnect-KeepAlive-*-macOS-universal.dmg`。
+2. 打开 DMG，将“EasyConnect 保活.app”拖到“Applications”快捷入口。
 3. 当前 Release 使用本地临时签名，未经过 Apple Developer ID 公证。首次打开若 macOS 提示无法验证开发者，请在 Finder 中右键应用并选择“打开”，再确认一次。
 
 系统要求：macOS 14 或更高版本。Release 同时支持 Apple Silicon 和 Intel Mac。
@@ -102,7 +102,8 @@ cd EasyConnectKeepAlive
 1. 使用原生绘制脚本生成 1024px 图标和完整 `.icns`；
 2. 分别编译 arm64 与 x86_64；
 3. 使用 `lipo` 合并通用二进制；
-4. 生成本地临时签名的 `build/EasyConnect 保活.app`。
+4. 生成本地临时签名的 `build/EasyConnect 保活.app`；
+5. 运行 `./scripts/package_dmg.sh` 可生成带 Applications 快捷入口的 DMG。
 
 也可以运行 Swift Package 的常规检查：
 
@@ -116,6 +117,8 @@ swift build
 Sources/                    SwiftUI 界面、控制器和探测逻辑
 Resources/                  Info.plist 与主图标
 scripts/build.sh            通用应用构建和签名
+scripts/package_dmg.sh      DMG 打包
+scripts/render_docs_screenshot.sh  2× Retina README 截图
 scripts/render_icon.swift   原生图标绘制
 docs/                       README 截图
 ```
