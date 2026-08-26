@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build universal macOS app
+        run: ./scripts/build.sh
+
+      - name: Verify bundle and architectures
+        run: |
+          codesign --verify --deep --strict --verbose=2 "build/EasyConnect 保活.app"
+          lipo -archs "build/EasyConnect 保活.app/Contents/MacOS/EasyConnectKeepAlive" | grep -Eq "x86_64 arm64|arm64 x86_64"
+
+      - name: Archive app
+        run: ditto -c -k --sequesterRsrc --keepParent "build/EasyConnect 保活.app" "EasyConnect-KeepAlive-macOS-universal.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EasyConnect-KeepAlive-macOS-universal
+          path: EasyConnect-KeepAlive-macOS-universal.zip
